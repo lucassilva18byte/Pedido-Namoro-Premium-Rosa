@@ -1,15 +1,14 @@
 body {
   margin: 0;
   font-family: Arial, sans-serif;
-  background: linear-gradient(to bottom, #1a001f, #330033);
+  background: linear-gradient(to top, #330033, #660066);
   color: white;
   text-align: center;
   overflow: hidden;
+  position: relative;
 }
 
-.hidden {
-  display: none;
-}
+.hidden { display: none; }
 
 .start-screen {
   height: 100vh;
@@ -19,13 +18,14 @@ body {
 }
 
 .start-screen button {
-  padding: 15px 30px;
-  font-size: 20px;
+  padding: 20px 40px;
+  font-size: 24px;
   background: #ff4da6;
   border: none;
-  border-radius: 30px;
+  border-radius: 40px;
   color: white;
   cursor: pointer;
+  box-shadow: 0 0 15px pink;
 }
 
 .container {
@@ -41,6 +41,8 @@ body {
   display: none;
   padding: 40px 20px;
   box-sizing: border-box;
+  animation: fade 1s ease;
+  z-index: 1;
 }
 
 .slide.active {
@@ -49,9 +51,11 @@ body {
 
 .photo {
   width: 80%;
-  max-width: 300px;
+  max-width: 350px;
   border-radius: 20px;
   margin-top: 20px;
+  animation: fadeIn 2s;
+  box-shadow: 0 0 30px pink;
 }
 
 .timeline {
@@ -60,18 +64,30 @@ body {
 }
 
 .timeline li {
-  margin: 15px 0;
-  font-size: 18px;
+  margin: 15px auto;
+  font-size: 20px;
+  background: rgba(255, 77, 166, 0.3);
+  padding: 15px 25px;
+  border-radius: 25px;
+  display: inline-block;
+  min-width: 220px;
+  box-shadow: 0 0 10px #ff4da6;
 }
 
 .buttons button {
-  padding: 15px 25px;
-  font-size: 20px;
+  padding: 20px 40px;
+  font-size: 24px;
   background: #ff4da6;
   border: none;
-  border-radius: 30px;
+  border-radius: 40px;
   color: white;
   cursor: pointer;
+  box-shadow: 0 0 20px pink;
+  transition: transform 0.2s;
+}
+
+.buttons button:hover {
+  transform: scale(1.1);
 }
 
 canvas {
@@ -79,4 +95,8 @@ canvas {
   top: 0;
   left: 0;
   pointer-events: none;
+  z-index: 0;
 }
+
+@keyframes fade { from {opacity:0} to {opacity:1} }
+@keyframes fadeIn { from {opacity:0} to {opacity:1} }
