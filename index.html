@@ -1,76 +1,106 @@
-<!DOCTYPE html>
-<html lang="pt-br">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Nossa História Cinemática</title>
-<link rel="stylesheet" href="style.css">
-</head>
-<body>
+// Efeito digitação
+function typeEffect(element,text,speed=50){
+  let i=0;
+  function typing(){
+    if(i<text.length){
+      element.innerHTML+=text.charAt(i);
+      i++;
+      setTimeout(typing,speed);
+    }
+  }
+  typing();
+}
 
-<audio id="music" src="assets/musica.mp3" loop></audio>
-<canvas id="canvas"></canvas>
+// Slides
+let current=1;
+function nextSlide(){
+  document.querySelectorAll(".slide").forEach(s=>s.classList.remove("active"));
+  current++;
+  document.getElementById("slide"+current).classList.add("active");
+}
 
-<!-- SLIDE 1: Introdução -->
-<div class="slide active" id="slide1">
-  <h1 id="typing">Tudo começou no dia em que eu escolhi você...</h1>
-  <div class="timer" id="timerTogether"></div>
-  <button onclick="nextSlide()">Continuar</button>
-</div>
+// Fotos parallax
+document.querySelectorAll(".photo").forEach(photo=>{
+  photo.addEventListener("mousemove",(e)=>{
+    let x=(e.offsetX/photo.clientWidth-0.5)*20;
+    let y=(e.offsetY/photo.clientHeight-0.5)*20;
+    photo.style.transform=`rotateY(${x}deg) rotateX(${-y}deg)`;
+  });
+  photo.addEventListener("mouseleave",()=>{photo.style.transform="rotateY(0) rotateX(0)";});
+});
 
-<!-- SLIDE 2: Foto 1 -->
-<div class="slide" id="slide2">
-  <div class="photo-container">
-    <img src="assets/foto1.jpg" class="photo">
-  </div>
-  <h2 id="typing2">Cada momento com você é único ❤️</h2>
-  <button onclick="nextSlide()">Próximo</button>
-</div>
+// Temporizador tempo juntos
+const startDate=new Date("2026-02-27T21:00:00");
+setInterval(()=>{
+  const now=new Date();
+  let diff=now-startDate;
+  let d=Math.floor(diff/(1000*60*60*24));
+  diff%=1000*60*60*24;
+  let h=Math.floor(diff/(1000*60*60));
+  diff%=1000*60*60;
+  let m=Math.floor(diff/(1000*60));
+  let s=Math.floor(diff/1000%60);
+  document.getElementById("timerTogether").innerText=`${d} dias ${h}h ${m}m ${s}s juntos ❤️`;
+},1000);
 
-<!-- SLIDE 3: Foto 2 -->
-<div class="slide" id="slide3">
-  <div class="photo-container">
-    <img src="assets/foto2.jpg" class="photo">
-  </div>
-  <h2 id="typing3">Nunca imaginei que encontraria alguém assim ✨</h2>
-  <button onclick="nextSlide()">Próximo</button>
-</div>
+// Aniversários
+function nextBirthday(month,day){
+  let now=new Date();
+  let year=now.getFullYear();
+  let birthday=new Date(year,month-1,day);
+  if(birthday<now) birthday.setFullYear(year+1);
+  return birthday-now;
+}
+setInterval(()=>{
+  let her=nextBirthday(6,19);
+  let you=nextBirthday(2,18);
+  function format(ms){
+    let d=Math.floor(ms/(1000*60*60*24));
+    ms%=1000*60*60*24;
+    let h=Math.floor(ms/(1000*60*60));
+    let m=Math.floor(ms/(1000*60)%60);
+    let s=Math.floor(ms/1000%60);
+    return `${d}d ${h}h ${m}m ${s}s`;
+  }
+  document.getElementById("timerHer").innerText="Aniversário dela: "+format(her);
+  document.getElementById("timerYou").innerText="Seu aniversário: "+format(you);
+},1000);
 
-<!-- SLIDE 4: Foto 3 -->
-<div class="slide" id="slide4">
-  <div class="photo-container">
-    <img src="assets/foto3.jpg" class="photo">
-  </div>
-  <h2 id="typing4">Obrigado por cada sorriso que compartilhamos 😍</h2>
-  <button onclick="nextSlide()">Próximo</button>
-</div>
+// Partículas e corações suaves
+const canvas=document.getElementById("canvas");
+const ctx=canvas.getContext("2d");
+canvas.width=window.innerWidth;
+canvas.height=window.innerHeight;
+let particles=[];
+for(let i=0;i<80;i++){
+  particles.push({x:Math.random()*canvas.width,y:Math.random()*canvas.height,size:2,speed:0.5,color:'rgba(255,182,193,0.5)'}); // corações suaves
+}
+function animate(){
+  ctx.clearRect(0,0,canvas.width,canvas.height);
+  particles.forEach(p=>{
+    ctx.beginPath();
+    ctx.arc(p.x,p.y,p.size,0,Math.PI*2);
+    ctx.fillStyle=p.color;
+    ctx.fill();
+    p.y-=p.speed;
+    if(p.y<0)p.y=canvas.height;
+  });
+  requestAnimationFrame(animate);
+}
+animate();
 
-<!-- SLIDE 5: Foto 4 -->
-<div class="slide" id="slide5">
-  <div class="photo-container">
-    <img src="assets/foto4.jpg" class="photo">
-  </div>
-  <h2 id="typing5">Nossa história é só o começo 💖</h2>
-  <button onclick="nextSlide()">Próximo</button>
-</div>
+// Música fade-in
+window.onload=()=>{
+  let music=document.getElementById("music");
+  music.volume=0;
+  music.play();
+  let fade=setInterval(()=>{
+    if(music.volume<1){music.volume+=0.02;}else clearInterval(fade);
+  },200);
+};
 
-<!-- SLIDE 6: Foto 5 -->
-<div class="slide" id="slide6">
-  <div class="photo-container">
-    <img src="assets/foto5.jpg" class="photo">
-  </div>
-  <h2 id="typing6">Quer continuar escrevendo essa história comigo? ❤️</h2>
-  <button onclick="celebrate()">SIM</button>
-</div>
-
-<!-- SLIDE 7: Temporizadores -->
-<div class="slide" id="slide7">
-  <h2>Nosso Tempo Juntos</h2>
-  <div class="timer" id="timerTogether"></div>
-  <div class="timer" id="timerHer"></div>
-  <div class="timer" id="timerYou"></div>
-</div>
-
-<script src="script.js"></script>
-</body>
-</html>
+// Função festa final
+function celebrate(){
+  document.body.style.background="linear-gradient(135deg,#3a005f,#ff00cc)";
+  alert("Essa é só a primeira página da nossa história ❤️");
+}

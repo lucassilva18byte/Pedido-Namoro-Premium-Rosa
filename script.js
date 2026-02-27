@@ -1,17 +1,18 @@
-// Efeito digitação
-function typeEffect(element,text,speed=50){
-  let i=0;
-  function typing(){
-    if(i<text.length){
-      element.innerHTML+=text.charAt(i);
-      i++;
-      setTimeout(typing,speed);
-    }
-  }
-  typing();
+// Inicia a experiência com música e primeira página
+function startExperience(){
+  document.getElementById("startScreen").classList.remove("active");
+  document.getElementById("slide1").classList.add("active");
+
+  let music = document.getElementById("music");
+  music.volume = 0;
+  music.play();
+  let fade = setInterval(()=>{
+    if(music.volume < 1){ music.volume += 0.02; } 
+    else clearInterval(fade);
+  },200);
 }
 
-// Slides
+// Avança slides
 let current=1;
 function nextSlide(){
   document.querySelectorAll(".slide").forEach(s=>s.classList.remove("active"));
@@ -89,18 +90,8 @@ function animate(){
 }
 animate();
 
-// Música fade-in
-window.onload=()=>{
-  let music=document.getElementById("music");
-  music.volume=0;
-  music.play();
-  let fade=setInterval(()=>{
-    if(music.volume<1){music.volume+=0.02;}else clearInterval(fade);
-  },200);
-};
-
 // Função festa final
 function celebrate(){
-  document.body.style.background="linear-gradient(135deg,#3a005f,#ff00cc)";
+  document.body.style.background="linear-gradient(135deg,#0b1a3d,#330066)";
   alert("Essa é só a primeira página da nossa história ❤️");
 }

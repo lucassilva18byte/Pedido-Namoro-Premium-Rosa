@@ -1,7 +1,7 @@
 body{
   margin:0;
   font-family:'Segoe UI', Arial, sans-serif;
-  background: linear-gradient(135deg,#1a001f,#330033);
+  background:#0b1a3d; /* azul noite */
   color:white;
   overflow:hidden;
   text-align:center;
