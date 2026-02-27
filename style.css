@@ -1,7 +1,7 @@
 body{
   margin:0;
   font-family:'Segoe UI', Arial, sans-serif;
-  background:#0b1a3d; /* azul noite */
+  background:#0b1a3d;
   color:white;
   overflow:hidden;
   text-align:center;
@@ -76,18 +76,6 @@ button:hover{transform:scale(1.1);}
   margin-top:20px;
   color:gold;
   text-shadow:0 0 10px gold;
-}
-
-/* Corações animados */
-.heart{
-  position:absolute;
-  font-size:25px;
-  animation:rise 6s linear forwards;
-}
-
-@keyframes rise{
-  from{transform:translateY(100vh);}
-  to{transform:translateY(-10vh);}
 }
 
 canvas{
