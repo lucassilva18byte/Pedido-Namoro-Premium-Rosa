@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nossa História ❤️</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="start-screen" id="startScreen">
+  <button onclick="startExperience()">Começar ❤️</button>
+</div>
+
+<audio id="music" src="assets/musica.mp3"></audio>
+
+<div class="container hidden" id="mainContent">
+
+  <canvas id="heartsCanvas"></canvas>
+
+  <div class="slide active">
+    <h1>Nossa História</h1>
+    <p id="timer"></p>
+  </div>
+
+  <div class="slide">
+    <img src="assets/foto.jpg" class="photo">
+    <p>Desde aquele primeiro momento, algo era diferente...</p>
+  </div>
+
+  <div class="slide">
+    <h2>Linha do Tempo</h2>
+    <ul class="timeline">
+      <li>💬 Primeiro "oi"</li>
+      <li>😂 Primeira risada juntos</li>
+      <li>❤️ Primeiro sentimento verdadeiro</li>
+      <li>✨ Hoje, aqui...</li>
+    </ul>
+  </div>
+
+  <div class="slide final">
+    <h1>Quer namorar comigo?</h1>
+    <div class="buttons">
+      <button onclick="explodeHearts()">SIM ❤️</button>
+    </div>
+  </div>
+
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>

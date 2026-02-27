@@ -1,0 +1,82 @@
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: linear-gradient(to bottom, #1a001f, #330033);
+  color: white;
+  text-align: center;
+  overflow: hidden;
+}
+
+.hidden {
+  display: none;
+}
+
+.start-screen {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.start-screen button {
+  padding: 15px 30px;
+  font-size: 20px;
+  background: #ff4da6;
+  border: none;
+  border-radius: 30px;
+  color: white;
+  cursor: pointer;
+}
+
+.container {
+  position: relative;
+  height: 100vh;
+  width: 100%;
+}
+
+.slide {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  display: none;
+  padding: 40px 20px;
+  box-sizing: border-box;
+}
+
+.slide.active {
+  display: block;
+}
+
+.photo {
+  width: 80%;
+  max-width: 300px;
+  border-radius: 20px;
+  margin-top: 20px;
+}
+
+.timeline {
+  list-style: none;
+  padding: 0;
+}
+
+.timeline li {
+  margin: 15px 0;
+  font-size: 18px;
+}
+
+.buttons button {
+  padding: 15px 25px;
+  font-size: 20px;
+  background: #ff4da6;
+  border: none;
+  border-radius: 30px;
+  color: white;
+  cursor: pointer;
+}
+
+canvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+}
