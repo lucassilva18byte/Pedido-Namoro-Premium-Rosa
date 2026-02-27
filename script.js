@@ -7,7 +7,7 @@ const ctx = canvas.getContext("2d");
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
 
-// Partículas cinematográficas
+// Partículas premium
 let particles = [];
 for(let i=0;i<100;i++){
   particles.push({
@@ -20,12 +20,12 @@ for(let i=0;i<100;i++){
 }
 
 // Fade-in música
-function fadeInAudio(audio, duration=2000){
+function fadeInAudio(audio,duration=2000){
   audio.volume = 0;
   audio.play();
   let step = 0.02;
   let interval = setInterval(()=>{
-    if(audio.volume < 1) audio.volume = Math.min(audio.volume + step,1);
+    if(audio.volume<1) audio.volume = Math.min(audio.volume+step,1);
     else clearInterval(interval);
   }, duration*step);
 }
@@ -41,18 +41,18 @@ function startExperience(){
   animate();
 }
 
-// Temporizador completo
+// Temporizador premium
 function startTimer(){
   const startDate = new Date("2024-03-01T00:00:00");
   setInterval(()=>{
     const now = new Date();
     let diff = now - startDate;
-    const days = Math.floor(diff / (1000*60*60*24));
+    const days = Math.floor(diff/(1000*60*60*24));
     diff %= (1000*60*60*24);
-    const hours = Math.floor(diff / (1000*60*60));
+    const hours = Math.floor(diff/(1000*60*60));
     diff %= (1000*60*60);
-    const mins = Math.floor(diff / (1000*60));
-    const secs = Math.floor(diff / 1000 % 60);
+    const mins = Math.floor(diff/(1000*60));
+    const secs = Math.floor(diff/1000%60);
     timerEl.innerText = `Vivendo nossa história há ${days}d ${hours}h ${mins}m ${secs}s ❤️`;
   },1000);
 }
@@ -64,10 +64,10 @@ function showSlide(index){
 }
 function nextSlide(){
   currentSlide++;
-  if(currentSlide < slides.length) showSlide(currentSlide);
+  if(currentSlide<slides.length) showSlide(currentSlide);
 }
 
-// Interatividade linha do tempo
+// Linha do tempo interativa
 document.querySelectorAll('.timeline li').forEach(item=>{
   item.addEventListener('mouseenter',()=> {
     const extra = item.dataset.extra;
@@ -78,7 +78,7 @@ document.querySelectorAll('.timeline li').forEach(item=>{
   });
 });
 
-// Animação partículas discretas
+// Partículas animadas
 function animate(){
   ctx.clearRect(0,0,canvas.width,canvas.height);
   particles.forEach(p=>{
@@ -86,7 +86,7 @@ function animate(){
     ctx.fillStyle = 'rgba(255,255,255,0.7)';
     ctx.fillText(p.char,p.x,p.y);
     p.y -= p.speed;
-    if(p.y < -10) p.y = canvas.height + 10;
+    if(p.y < -10) p.y = canvas.height+10;
     p.x += Math.sin(p.y*0.01);
   });
   requestAnimationFrame(animate);
@@ -99,7 +99,7 @@ function celebrate(){
       x: Math.random()*canvas.width,
       y: Math.random()*canvas.height,
       size: 5+Math.random()*10,
-      speed: -1- Math.random()*3,
+      speed: -1-Math.random()*3,
       char: ['❤️','✨','•'][Math.floor(Math.random()*3)]
     });
   }
