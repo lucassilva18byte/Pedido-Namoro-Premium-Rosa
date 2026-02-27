@@ -3,63 +3,75 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Nossa História Top Premium ❤️</title>
+<title>Nossa História Premium</title>
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<div class="start-screen" id="startScreen">
-  <button onclick="startExperience()">Começar ❤️</button>
-</div>
-
 <audio id="music" src="assets/musica.mp3" loop></audio>
 <canvas id="canvas"></canvas>
 
-<div class="container hidden" id="mainContent">
+<!-- SLIDE 1: Intro -->
+<div class="slide active" id="slide1">
+  <h1 id="typing"></h1>
+  <div class="timer" id="timerTogether"></div>
+  <button onclick="nextSlide()">Continuar</button>
+</div>
 
-  <!-- Slide inicial -->
-  <div class="slide active">
-    <h1>Nossa História</h1>
-    <p id="timer"></p>
-    <p class="hint">Passe o mouse na tela para descobrir segredos...</p>
+<!-- SLIDE 2: Foto 1 -->
+<div class="slide" id="slide2">
+  <div class="photo-container">
+    <img src="assets/foto1.jpg" class="photo" onclick="secretMessage(this)">
   </div>
+  <p id="secret"></p>
+  <button onclick="nextSlide()">Próximo</button>
+</div>
 
-  <!-- Slide foto principal -->
-  <div class="slide">
-    <div class="photo-container">
-      <img src="assets/foto.jpg" class="photo" id="mainPhoto">
-    </div>
-    <p id="photoMessage">Desde aquele primeiro momento, algo era diferente...</p>
+<!-- SLIDE 3: Foto 2 -->
+<div class="slide" id="slide3">
+  <div class="photo-container">
+    <img src="assets/foto2.jpg" class="photo">
   </div>
+  <h2 id="typing2"></h2>
+  <button onclick="nextSlide()">Próximo</button>
+</div>
 
-  <!-- Linha do tempo interativa -->
-  <div class="slide">
-    <h2>Linha do Tempo</h2>
-    <ul class="timeline">
-      <li data-extra="Lembro do frio na barriga 💓"><span>💬</span> Primeiro "oi"</li>
-      <li data-extra="Não esquecerei nossa primeira risada juntos 😄"><span>😂</span> Primeira risada juntos</li>
-      <li data-extra="Quando percebi que era amor verdadeiro ❤️"><span>❤️</span> Primeiro sentimento verdadeiro</li>
-      <li data-extra="Hoje comemoramos cada momento ✨"><span>✨</span> Hoje, aqui...</li>
-    </ul>
-    <p class="timeline-extra" id="timelineExtra"></p>
+<!-- SLIDE 4: Mini Jogo 1 -->
+<div class="slide" id="slide4">
+  <h2>Clique em 5 corações ❤️</h2>
+  <div id="score">0 / 5</div>
+  <button onclick="startGame()">Começar</button>
+</div>
+
+<!-- SLIDE 5: Foto 3 -->
+<div class="slide" id="slide5">
+  <div class="photo-container">
+    <img src="assets/foto3.jpg" class="photo">
   </div>
+  <button onclick="nextSlide()">Próximo</button>
+</div>
 
-  <!-- Slide final -->
-  <div class="slide final">
-    <h1>Quer namorar comigo?</h1>
-    <div class="buttons">
-      <button onclick="celebrate()">SIM ❤️</button>
-      <button onclick="showGallery()">Ver Memórias 📸</button>
-    </div>
-  </div>
+<!-- SLIDE 6: Temporizadores aniversários -->
+<div class="slide" id="slide6">
+  <h2>Nossos Tempos</h2>
+  <div class="timer" id="timerHer"></div>
+  <div class="timer" id="timerYou"></div>
+  <button onclick="nextSlide()">Próximo</button>
+</div>
 
-  <!-- Mini galeria -->
-  <div class="slide gallery hidden" id="gallerySlide">
-    <h2>Nossas Memórias</h2>
-    <div class="gallery-container" id="galleryContainer"></div>
-    <button onclick="closeGallery()">Fechar Galeria</button>
-  </div>
+<!-- SLIDE 7: Mini Jogo 2 -->
+<div class="slide" id="slide7">
+  <h2>Coloque na ordem correta:</h2>
+  <button onclick="sequence(1)">Primeiro beijo</button>
+  <button onclick="sequence(2)">Primeira viagem</button>
+  <button onclick="sequence(3)">Primeira risada</button>
+  <p id="sequenceResult"></p>
+</div>
 
+<!-- SLIDE 8: Festa final -->
+<div class="slide" id="slide8">
+  <h1>Quer continuar escrevendo essa história comigo?</h1>
+  <button onclick="celebrate()">SIM ❤️</button>
 </div>
 
 <script src="script.js"></script>
