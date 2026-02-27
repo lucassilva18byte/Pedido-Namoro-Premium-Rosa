@@ -11,67 +11,64 @@
 <audio id="music" src="assets/musica.mp3" loop></audio>
 <canvas id="canvas"></canvas>
 
-<!-- SLIDE 1 -->
+<!-- SLIDE 1: Introdução -->
 <div class="slide active" id="slide1">
-  <h1 id="typing"></h1>
+  <h1 id="typing">Tudo começou no dia em que eu escolhi você...</h1>
   <div class="timer" id="timerTogether"></div>
   <button onclick="nextSlide()">Continuar</button>
 </div>
 
-<!-- SLIDE 2 -->
+<!-- SLIDE 2: Foto 1 -->
 <div class="slide" id="slide2">
   <div class="photo-container">
-    <img src="assets/foto1.jpg" class="photo" onclick="secretMessage(this)">
+    <img src="assets/foto1.jpg" class="photo">
   </div>
-  <p id="secret"></p>
+  <h2 id="typing2">Cada momento com você é único ❤️</h2>
   <button onclick="nextSlide()">Próximo</button>
 </div>
 
-<!-- SLIDE 3 -->
+<!-- SLIDE 3: Foto 2 -->
 <div class="slide" id="slide3">
   <div class="photo-container">
     <img src="assets/foto2.jpg" class="photo">
   </div>
-  <h2 id="typing2"></h2>
+  <h2 id="typing3">Nunca imaginei que encontraria alguém assim ✨</h2>
   <button onclick="nextSlide()">Próximo</button>
 </div>
 
-<!-- SLIDE 4 -->
+<!-- SLIDE 4: Foto 3 -->
 <div class="slide" id="slide4">
-  <h2>Clique em 5 corações ❤️</h2>
-  <div id="score">0 / 5</div>
-  <button onclick="startGame()">Começar</button>
-</div>
-
-<!-- SLIDE 5 -->
-<div class="slide" id="slide5">
   <div class="photo-container">
     <img src="assets/foto3.jpg" class="photo">
   </div>
+  <h2 id="typing4">Obrigado por cada sorriso que compartilhamos 😍</h2>
   <button onclick="nextSlide()">Próximo</button>
 </div>
 
-<!-- SLIDE 6 -->
+<!-- SLIDE 5: Foto 4 -->
+<div class="slide" id="slide5">
+  <div class="photo-container">
+    <img src="assets/foto4.jpg" class="photo">
+  </div>
+  <h2 id="typing5">Nossa história é só o começo 💖</h2>
+  <button onclick="nextSlide()">Próximo</button>
+</div>
+
+<!-- SLIDE 6: Foto 5 -->
 <div class="slide" id="slide6">
-  <h2>Nossos Tempos</h2>
+  <div class="photo-container">
+    <img src="assets/foto5.jpg" class="photo">
+  </div>
+  <h2 id="typing6">Quer continuar escrevendo essa história comigo? ❤️</h2>
+  <button onclick="celebrate()">SIM</button>
+</div>
+
+<!-- SLIDE 7: Temporizadores -->
+<div class="slide" id="slide7">
+  <h2>Nosso Tempo Juntos</h2>
+  <div class="timer" id="timerTogether"></div>
   <div class="timer" id="timerHer"></div>
   <div class="timer" id="timerYou"></div>
-  <button onclick="nextSlide()">Próximo</button>
-</div>
-
-<!-- SLIDE 7 -->
-<div class="slide" id="slide7">
-  <h2>Coloque na ordem correta:</h2>
-  <button onclick="sequence(1)">Primeiro beijo</button>
-  <button onclick="sequence(2)">Primeira viagem</button>
-  <button onclick="sequence(3)">Primeira risada</button>
-  <p id="sequenceResult"></p>
-</div>
-
-<!-- SLIDE 8 -->
-<div class="slide" id="slide8">
-  <h1>Quer continuar escrevendo essa história comigo?</h1>
-  <button onclick="celebrate()">SIM ❤️</button>
 </div>
 
 <script src="script.js"></script>
