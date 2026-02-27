@@ -7,36 +7,54 @@ const ctx = canvas.getContext("2d");
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
 
-// Inicial balões e corações
+// Partículas cinematográficas
 let particles = [];
-for(let i=0;i<80;i++){
+for(let i=0;i<100;i++){
   particles.push({
     x: Math.random()*canvas.width,
     y: Math.random()*canvas.height,
-    size: 20+Math.random()*30,
-    speed: 0.5+Math.random()*1.5,
-    char: Math.random()<0.5?'❤️':'🎈'
+    size: 2+Math.random()*4,
+    speed: 0.2+Math.random()*0.5,
+    char: Math.random()<0.2?'❤️':'•'
   });
 }
 
+// Fade-in música
+function fadeInAudio(audio, duration=2000){
+  audio.volume = 0;
+  audio.play();
+  let step = 0.02;
+  let interval = setInterval(()=>{
+    if(audio.volume < 1){
+      audio.volume = Math.min(audio.volume + step,1);
+    } else clearInterval(interval);
+  }, duration*step);
+}
+
+// Iniciar experiência
 function startExperience(){
   document.getElementById("startScreen").style.display = "none";
   document.getElementById("mainContent").classList.remove("hidden");
-  music.play();
+  fadeInAudio(music);
   showSlide(0);
   startTimer();
-  setInterval(nextSlide, 6000);
+  setInterval(nextSlide, 7000);
   animate();
 }
 
-// Temporizador
+// Temporizador completo
 function startTimer(){
   const startDate = new Date("2024-03-01T00:00:00");
   setInterval(()=>{
     const now = new Date();
-    const diff = now - startDate;
+    let diff = now - startDate;
     const days = Math.floor(diff / (1000*60*60*24));
-    timerEl.innerText = `Estamos vivendo essa história há ${days} dias ❤️`;
+    diff %= (1000*60*60*24);
+    const hours = Math.floor(diff / (1000*60*60));
+    diff %= (1000*60*60);
+    const mins = Math.floor(diff / (1000*60));
+    const secs = Math.floor(diff / 1000 % 60);
+    timerEl.innerText = `Vivendo nossa história há ${days}d ${hours}h ${mins}m ${secs}s ❤️`;
   },1000);
 }
 
@@ -45,35 +63,35 @@ function showSlide(index){
   slides.forEach(s=>s.classList.remove("active"));
   slides[index].classList.add("active");
 }
-
 function nextSlide(){
   currentSlide++;
   if(currentSlide < slides.length) showSlide(currentSlide);
 }
 
-// Animação de balões e corações
+// Animação partículas discretas
 function animate(){
   ctx.clearRect(0,0,canvas.width,canvas.height);
   particles.forEach(p=>{
     ctx.font = p.size+'px Arial';
+    ctx.fillStyle = 'rgba(255,255,255,0.7)';
     ctx.fillText(p.char,p.x,p.y);
     p.y -= p.speed;
-    if(p.y < -50) p.y = canvas.height + 50;
-    p.x += Math.sin(p.y*0.01); // leve balanço
+    if(p.y < -10) p.y = canvas.height + 10;
+    p.x += Math.sin(p.y*0.01);
   });
   requestAnimationFrame(animate);
 }
 
-// Festa final
+// Festa cinematográfica
 function celebrate(){
-  // adiciona muitos corações e confetes
+  // Explosão partículas
   for(let i=0;i<200;i++){
     particles.push({
       x: Math.random()*canvas.width,
       y: Math.random()*canvas.height,
-      size: 20+Math.random()*40,
-      speed: -2-Math.random()*3,
-      char: ['❤️','🎉','✨','🎈'][Math.floor(Math.random()*4)]
+      size: 5+Math.random()*10,
+      speed: -1- Math.random()*3,
+      char: ['❤️','✨','•'][Math.floor(Math.random()*3)]
     });
   }
   showSlide(slides.length-1);
