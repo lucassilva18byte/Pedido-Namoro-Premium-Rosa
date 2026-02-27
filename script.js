@@ -1,12 +1,11 @@
 let current = 1;
 
-// Inicia experiência
 function startExperience(){
   document.getElementById("startScreen").classList.remove("active");
   document.getElementById("slidesContainer").classList.remove("hidden");
   showSlide(1);
 
-  // Inicia música
+  // Música com fade-in
   let music = document.getElementById("music");
   music.volume = 0;
   music.play();
@@ -15,8 +14,8 @@ function startExperience(){
     else clearInterval(fade);
   },200);
 
-  // Inicia temporizadores
   startTimers();
+  spawnHearts();
 }
 
 // Mostra slide
@@ -26,10 +25,8 @@ function showSlide(n){
   if(slide) slide.classList.add("active");
 
   // Efeito digitação
-  if(slide && slide.querySelector("h1, h2")){
-    const el = slide.querySelector("h1, h2");
-    if(el.dataset.text) typeEffect(el, el.dataset.text);
-  }
+  const h = slide.querySelector("h1, h2");
+  if(h && h.dataset.text) typeEffect(h,h.dataset.text);
 }
 
 // Avança slide
@@ -52,7 +49,7 @@ function typeEffect(element,text,speed=50){
   typing();
 }
 
-// Parallax nas fotos
+// Fotos parallax
 document.querySelectorAll(".photo").forEach(photo=>{
   photo.addEventListener("mousemove",(e)=>{
     let x=(e.offsetX/photo.clientWidth-0.5)*20;
@@ -74,13 +71,10 @@ function startTimers(){
     diff%=1000*60*60;
     let m=Math.floor(diff/(1000*60));
     let s=Math.floor(diff/1000%60);
-    let el = document.getElementById("timerTogether");
-    let elSlide = document.getElementById("timerTogetherSlide");
-    if(el) el.innerText = `${d} dias ${h}h ${m}m ${s}s juntos ❤️`;
-    if(elSlide) elSlide.innerText = `${d} dias ${h}h ${m}m ${s}s juntos ❤️`;
+    document.getElementById("timerTogether").innerText = `${d} dias ${h}h ${m}m ${s}s juntos ❤️`;
+    document.getElementById("timerTogetherSlide").innerText = `${d} dias ${h}h ${m}m ${s}s juntos ❤️`;
   },1000);
 
-  // Aniversários
   setInterval(()=>{
     let her=nextBirthday(6,19);
     let you=nextBirthday(2,18);
@@ -105,24 +99,32 @@ function nextBirthday(month,day){
   return birthday-now;
 }
 
-// Partículas suaves
+// Partículas/corações no fundo
 const canvas=document.getElementById("canvas");
 const ctx=canvas.getContext("2d");
 canvas.width=window.innerWidth;
 canvas.height=window.innerHeight;
 let particles=[];
-for(let i=0;i<80;i++){
-  particles.push({x:Math.random()*canvas.width,y:Math.random()*canvas.height,size:2,speed:0.5,color:'rgba(255,182,193,0.5)'});
+
+function spawnHearts(){
+  for(let i=0;i<50;i++){
+    particles.push({
+      x: Math.random()*canvas.width,
+      y: Math.random()*canvas.height,
+      size: 20+Math.random()*10,
+      speed:0.3+Math.random()*0.3,
+      char:'❤️'
+    });
+  }
 }
+
 function animate(){
   ctx.clearRect(0,0,canvas.width,canvas.height);
   particles.forEach(p=>{
-    ctx.beginPath();
-    ctx.arc(p.x,p.y,p.size,0,Math.PI*2);
-    ctx.fillStyle=p.color;
-    ctx.fill();
+    ctx.font=p.size+"px Arial";
+    ctx.fillText(p.char,p.x,p.y);
     p.y-=p.speed;
-    if(p.y<0)p.y=canvas.height;
+    if(p.y<0) p.y=canvas.height;
   });
   requestAnimationFrame(animate);
 }

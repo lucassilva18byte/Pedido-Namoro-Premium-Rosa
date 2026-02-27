@@ -12,7 +12,7 @@
 <canvas id="canvas"></canvas>
 
 <!-- TELA INICIAL -->
-<div id="startScreen" class="active start-screen">
+<div id="startScreen" class="start-screen active">
   <h1>Nossa História ❤️</h1>
   <button onclick="startExperience()">Começar</button>
 </div>
@@ -20,59 +20,52 @@
 <!-- CONTAINER DE SLIDES -->
 <div id="slidesContainer" class="hidden">
 
-  <!-- SLIDE 1 -->
   <div class="slide" id="slide1">
-    <h1 id="typing"></h1>
+    <h1 id="typing1" data-text="Tudo começou no dia em que eu escolhi você..."></h1>
     <div class="timer" id="timerTogether"></div>
     <button onclick="nextSlide()">Continuar</button>
   </div>
 
-  <!-- SLIDE 2 -->
   <div class="slide" id="slide2">
     <div class="photo-container">
       <img src="assets/foto1.jpg" class="photo">
     </div>
-    <h2 id="typing2"></h2>
+    <h2 id="typing2" data-text="Cada momento com você é único ❤️"></h2>
     <button onclick="nextSlide()">Próximo</button>
   </div>
 
-  <!-- SLIDE 3 -->
   <div class="slide" id="slide3">
     <div class="photo-container">
       <img src="assets/foto2.jpg" class="photo">
     </div>
-    <h2 id="typing3"></h2>
+    <h2 id="typing3" data-text="Nunca imaginei que encontraria alguém assim ✨"></h2>
     <button onclick="nextSlide()">Próximo</button>
   </div>
 
-  <!-- SLIDE 4 -->
   <div class="slide" id="slide4">
     <div class="photo-container">
       <img src="assets/foto3.jpg" class="photo">
     </div>
-    <h2 id="typing4"></h2>
+    <h2 id="typing4" data-text="Obrigado por cada sorriso que compartilhamos 😍"></h2>
     <button onclick="nextSlide()">Próximo</button>
   </div>
 
-  <!-- SLIDE 5 -->
   <div class="slide" id="slide5">
     <div class="photo-container">
       <img src="assets/foto4.jpg" class="photo">
     </div>
-    <h2 id="typing5"></h2>
+    <h2 id="typing5" data-text="Nossa história é só o começo 💖"></h2>
     <button onclick="nextSlide()">Próximo</button>
   </div>
 
-  <!-- SLIDE 6 -->
   <div class="slide" id="slide6">
     <div class="photo-container">
       <img src="assets/foto5.jpg" class="photo">
     </div>
-    <h2 id="typing6"></h2>
+    <h2 id="typing6" data-text="Quer continuar escrevendo essa história comigo? ❤️"></h2>
     <button onclick="celebrate()">SIM ❤️</button>
   </div>
 
-  <!-- SLIDE 7 -->
   <div class="slide" id="slide7">
     <h2>Nosso Tempo Juntos</h2>
     <div class="timer" id="timerTogetherSlide"></div>

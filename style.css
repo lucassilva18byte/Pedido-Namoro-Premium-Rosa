@@ -78,11 +78,11 @@ button:hover{transform:scale(1.1);}
   text-shadow:0 0 10px gold;
 }
 
+/* Corações animados */
 .heart{
   position:absolute;
   font-size:25px;
-  cursor:pointer;
-  animation:rise 5s linear forwards;
+  animation:rise 6s linear forwards;
 }
 
 @keyframes rise{
