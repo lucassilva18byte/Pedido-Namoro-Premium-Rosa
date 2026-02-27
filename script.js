@@ -25,9 +25,8 @@ function fadeInAudio(audio, duration=2000){
   audio.play();
   let step = 0.02;
   let interval = setInterval(()=>{
-    if(audio.volume < 1){
-      audio.volume = Math.min(audio.volume + step,1);
-    } else clearInterval(interval);
+    if(audio.volume < 1) audio.volume = Math.min(audio.volume + step,1);
+    else clearInterval(interval);
   }, duration*step);
 }
 
@@ -68,6 +67,17 @@ function nextSlide(){
   if(currentSlide < slides.length) showSlide(currentSlide);
 }
 
+// Interatividade linha do tempo
+document.querySelectorAll('.timeline li').forEach(item=>{
+  item.addEventListener('mouseenter',()=> {
+    const extra = item.dataset.extra;
+    document.getElementById('timelineExtra').innerText = extra;
+  });
+  item.addEventListener('mouseleave',()=> {
+    document.getElementById('timelineExtra').innerText = '';
+  });
+});
+
 // Animação partículas discretas
 function animate(){
   ctx.clearRect(0,0,canvas.width,canvas.height);
@@ -84,7 +94,6 @@ function animate(){
 
 // Festa cinematográfica
 function celebrate(){
-  // Explosão partículas
   for(let i=0;i<200;i++){
     particles.push({
       x: Math.random()*canvas.width,
@@ -94,5 +103,25 @@ function celebrate(){
       char: ['❤️','✨','•'][Math.floor(Math.random()*3)]
     });
   }
+  showSlide(slides.length-1);
+}
+
+// Galeria de memórias
+const gallerySlide = document.getElementById('gallerySlide');
+const galleryContainer = document.getElementById('galleryContainer');
+const galleryImages = ['assets/foto1.jpg','assets/foto2.jpg','assets/foto3.jpg'];
+
+function showGallery(){
+  gallerySlide.classList.remove('hidden');
+  slides.forEach(s=>s.classList.remove('active'));
+  galleryContainer.innerHTML = '';
+  galleryImages.forEach(src=>{
+    const img = document.createElement('img');
+    img.src = src;
+    galleryContainer.appendChild(img);
+  });
+}
+function closeGallery(){
+  gallerySlide.classList.add('hidden');
   showSlide(slides.length-1);
 }

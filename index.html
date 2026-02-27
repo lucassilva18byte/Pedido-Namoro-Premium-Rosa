@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Nossa História ❤️</title>
-  <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nossa História Premium ❤️</title>
+<link rel="stylesheet" href="style.css">
 </head>
 <body>
 
@@ -13,38 +13,53 @@
 </div>
 
 <audio id="music" src="assets/musica.mp3" loop></audio>
-
 <canvas id="canvas"></canvas>
 
 <div class="container hidden" id="mainContent">
 
+  <!-- Slide inicial -->
   <div class="slide active">
     <h1>Nossa História</h1>
     <p id="timer"></p>
+    <p class="hint">Passe o mouse na tela para descobrir segredos...</p>
   </div>
 
+  <!-- Slide foto -->
   <div class="slide">
     <div class="photo-container">
-      <img src="assets/foto.jpg" class="photo">
+      <img src="assets/foto.jpg" class="photo" id="mainPhoto">
     </div>
-    <p>Desde aquele primeiro momento, algo era diferente...</p>
+    <p id="photoMessage">Desde aquele primeiro momento, algo era diferente...</p>
   </div>
 
+  <!-- Linha do tempo -->
   <div class="slide">
     <h2>Linha do Tempo</h2>
     <ul class="timeline">
-      <li><span>💬</span> Primeiro "oi"</li>
-      <li><span>😂</span> Primeira risada juntos</li>
-      <li><span>❤️</span> Primeiro sentimento verdadeiro</li>
-      <li><span>✨</span> Hoje, aqui...</li>
+      <li data-extra="Lembro do frio na barriga 💓"><span>💬</span> Primeiro "oi"</li>
+      <li data-extra="Não esquecerei nossa primeira risada juntos 😄"><span>😂</span> Primeira risada juntos</li>
+      <li data-extra="Quando percebi que era amor verdadeiro ❤️"><span>❤️</span> Primeiro sentimento verdadeiro</li>
+      <li data-extra="Hoje comemoramos cada momento ✨"><span>✨</span> Hoje, aqui...</li>
     </ul>
+    <p class="timeline-extra" id="timelineExtra"></p>
   </div>
 
+  <!-- Slide final -->
   <div class="slide final">
     <h1>Quer namorar comigo?</h1>
     <div class="buttons">
       <button onclick="celebrate()">SIM ❤️</button>
+      <button onclick="showGallery()">Ver Memórias 📸</button>
     </div>
+  </div>
+
+  <!-- Mini galeria -->
+  <div class="slide gallery hidden" id="gallerySlide">
+    <h2>Nossas Memórias</h2>
+    <div class="gallery-container" id="galleryContainer">
+      <!-- Fotos adicionadas pelo JS -->
+    </div>
+    <button onclick="closeGallery()">Fechar Galeria</button>
   </div>
 
 </div>
