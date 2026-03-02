@@ -1,218 +1,54 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-br">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Algo Especial 💙</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nossa História ❤️</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
 
-<style>
-:root{
-  --blue-dark:#050b1a;
-    --blue-glow:#1e90ff;
-      --text:#eaf2ff;
-      }
+<div class="start-screen" id="startScreen">
+  <button onclick="startExperience()">Começar nossa história ❤️</button>
+</div>
 
-      *{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',sans-serif;}
+<audio id="music" src="assets/musica.mp3"></audio>
 
-      body{
-        background:radial-gradient(circle at top, #0a1a3a, var(--blue-dark));
-          color:var(--text);
-            overflow:hidden;
-            }
+<div class="container hidden" id="mainContent">
+  <canvas id="bgCanvas"></canvas>
 
-            /* PARTICULAS */
-            canvas{
-              position:fixed;
-                inset:0;
-                  z-index:-1;
-                  }
+  <div class="slide active">
+    <img src="assets/foto1.jpg" class="photo">
+    <p id="frase1"></p>
+  </div>
 
-                  /* TELA INICIAL */
-                  #intro{
-                    height:100vh;
-                      display:flex;
-                        flex-direction:column;
-                          justify-content:center;
-                            align-items:center;
-                              text-align:center;
-                              }
+  <div class="slide">
+    <img src="assets/foto2.jpg" class="photo">
+    <p id="frase2"></p>
+  </div>
 
-                              #intro h1{
-                                font-size:2.5rem;
-                                  text-shadow:0 0 25px var(--blue-glow);
-                                    animation:fadeIn 2s ease;
-                                    }
+  <div class="slide">
+    <img src="assets/foto3.jpg" class="photo">
+    <p id="frase3"></p>
+  </div>
 
-                                    #intro button{
-                                      margin-top:30px;
-                                        padding:15px 40px;
-                                          font-size:1.1rem;
-                                            background:transparent;
-                                              border:2px solid var(--blue-glow);
-                                                color:var(--text);
-                                                  border-radius:50px;
-                                                    cursor:pointer;
-                                                      box-shadow:0 0 20px rgba(30,144,255,.5);
-                                                        transition:.3s;
-                                                        }
+  <div class="slide">
+    <h2>Estamos oficialmente juntos há:</h2>
+    <div id="timer"></div>
+  </div>
 
-                                                        #intro button:hover{
-                                                          background:var(--blue-glow);
-                                                            color:#000;
-                                                            }
+  <div class="slide final">
+    <h1 id="mensagemFinal"></h1>
+    <div class="buttons">
+      <button class="sim" onclick="explodeHearts()">SIM ❤️</button>
+      <button class="nao" id="naoBtn">NÃO 😈</button>
+    </div>
+    <p id="respostaFinal"></p>
+  </div>
 
-                                                            section{
-                                                              display:none;
-                                                                padding:40px 20px;
-                                                                  text-align:center;
-                                                                  }
+</div>
 
-                                                                  /* TIMER */
-                                                                  #timer{
-                                                                    font-size:1.5rem;
-                                                                      margin-bottom:30px;
-                                                                        text-shadow:0 0 15px var(--blue-glow);
-                                                                        }
-
-                                                                        /* GALERIA */
-                                                                        .gallery{
-                                                                          display:flex;
-                                                                            gap:20px;
-                                                                              overflow-x:auto;
-                                                                                padding:20px;
-                                                                                }
-
-                                                                                .card{
-                                                                                  min-width:250px;
-                                                                                    height:350px;
-                                                                                      border-radius:20px;
-                                                                                        overflow:hidden;
-                                                                                          position:relative;
-                                                                                            box-shadow:0 0 25px rgba(30,144,255,.3);
-                                                                                            }
-
-                                                                                            .card img{
-                                                                                              width:100%;
-                                                                                                height:100%;
-                                                                                                  object-fit:cover;
-                                                                                                    animation:zoomSlow 20s infinite alternate;
-                                                                                                    }
-
-                                                                                                    .card span{
-                                                                                                      position:absolute;
-                                                                                                        bottom:20px;
-                                                                                                          left:20px;
-                                                                                                            right:20px;
-                                                                                                              background:rgba(0,0,0,.5);
-                                                                                                                padding:10px;
-                                                                                                                  border-radius:10px;
-                                                                                                                    backdrop-filter:blur(5px);
-                                                                                                                    }
-
-                                                                                                                    /* ANIMAÇÕES */
-                                                                                                                    @keyframes fadeIn{
-                                                                                                                      from{opacity:0;transform:translateY(20px)}
-                                                                                                                        to{opacity:1;transform:translateY(0)}
-                                                                                                                        }
-
-                                                                                                                        @keyframes zoomSlow{
-                                                                                                                          from{transform:scale(1)}
-                                                                                                                            to{transform:scale(1.15)}
-                                                                                                                            }
-                                                                                                                            </style>
-                                                                                                                            </head>
-
-                                                                                                                            <body>
-
-                                                                                                                            <canvas id="particles"></canvas>
-
-                                                                                                                            <!-- TELA INICIAL -->
-                                                                                                                            <div id="intro">
-                                                                                                                              <h1>Preparei algo especial pra você 💙</h1>
-                                                                                                                                <button onclick="start()">Começar</button>
-                                                                                                                                </div>
-
-                                                                                                                                <!-- CONTEÚDO -->
-                                                                                                                                <section id="content">
-                                                                                                                                  <div id="timer"></div>
-
-                                                                                                                                    <h2 style="margin-bottom:20px;">Momentos que vivem em mim ✨</h2>
-
-                                                                                                                                      <div class="gallery">
-                                                                                                                                          <div class="card">
-                                                                                                                                                <img src="img1.jpg">
-                                                                                                                                                      <span>Desde o primeiro olhar</span>
-                                                                                                                                                          </div>
-                                                                                                                                                              <div class="card">
-                                                                                                                                                                    <img src="img2.jpg">
-                                                                                                                                                                          <span>Você virou meu lugar seguro</span>
-                                                                                                                                                                              </div>
-                                                                                                                                                                                  <div class="card">
-                                                                                                                                                                                        <img src="img3.jpg">
-                                                                                                                                                                                              <span>E tudo faz sentido com você</span>
-                                                                                                                                                                                                  </div>
-                                                                                                                                                                                                    </div>
-                                                                                                                                                                                                    </section>
-
-                                                                                                                                                                                                    <audio id="music" src="music.mp3"></audio>
-
-                                                                                                                                                                                                    <script>
-                                                                                                                                                                                                    // DATA IMPORTANTE (EDITÁVEL)
-                                                                                                                                                                                                    const startDate = new Date("2023-06-10T00:00:00");
-
-                                                                                                                                                                                                    // BOTÃO INICIAR
-                                                                                                                                                                                                    function start(){
-                                                                                                                                                                                                      document.getElementById("intro").style.display="none";
-                                                                                                                                                                                                        document.getElementById("content").style.display="block";
-                                                                                                                                                                                                          document.getElementById("music").play();
-                                                                                                                                                                                                            updateTimer();
-                                                                                                                                                                                                              setInterval(updateTimer,1000);
-                                                                                                                                                                                                              }
-
-                                                                                                                                                                                                              // TIMER
-                                                                                                                                                                                                              function updateTimer(){
-                                                                                                                                                                                                                const now = new Date();
-                                                                                                                                                                                                                  const diff = now - startDate;
-                                                                                                                                                                                                                    const days = Math.floor(diff/86400000);
-                                                                                                                                                                                                                      const hours = Math.floor(diff%86400000/3600000);
-                                                                                                                                                                                                                        const minutes = Math.floor(diff%3600000/60000);
-
-                                                                                                                                                                                                                          document.getElementById("timer").innerText =
-                                                                                                                                                                                                                            `Estamos juntos há ${days} dias, ${hours} horas e ${minutes} minutos 💙`;
-                                                                                                                                                                                                                            }
-
-                                                                                                                                                                                                                            // PARTICULAS + CORAÇÕES
-                                                                                                                                                                                                                            const canvas=document.getElementById("particles");
-                                                                                                                                                                                                                            const ctx=canvas.getContext("2d");
-                                                                                                                                                                                                                            canvas.width=innerWidth;
-                                                                                                                                                                                                                            canvas.height=innerHeight;
-
-                                                                                                                                                                                                                            let particles=[];
-                                                                                                                                                                                                                            for(let i=0;i<60;i++){
-                                                                                                                                                                                                                              particles.push({
-                                                                                                                                                                                                                                  x:Math.random()*canvas.width,
-                                                                                                                                                                                                                                      y:Math.random()*canvas.height,
-                                                                                                                                                                                                                                          r:Math.random()*2+1,
-                                                                                                                                                                                                                                              dy:Math.random()+0.3
-                                                                                                                                                                                                                                                });
-                                                                                                                                                                                                                                                }
-
-                                                                                                                                                                                                                                                function animate(){
-                                                                                                                                                                                                                                                  ctx.clearRect(0,0,canvas.width,canvas.height);
-                                                                                                                                                                                                                                                    particles.forEach(p=>{
-                                                                                                                                                                                                                                                        ctx.beginPath();
-                                                                                                                                                                                                                                                            ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
-                                                                                                                                                                                                                                                                ctx.fillStyle="rgba(30,144,255,.4)";
-                                                                                                                                                                                                                                                                    ctx.fill();
-                                                                                                                                                                                                                                                                        p.y-=p.dy;
-                                                                                                                                                                                                                                                                            if(p.y<0)p.y=canvas.height;
-                                                                                                                                                                                                                                                                              });
-                                                                                                                                                                                                                                                                                requestAnimationFrame(animate);
-                                                                                                                                                                                                                                                                                }
-                                                                                                                                                                                                                                                                                animate();
-
-                                                                                                                                                                                                                                                                                window.onresize=()=>{canvas.width=innerWidth;canvas.height=innerHeight;}
-                                                                                                                                                                                                                                                                                </script>
-
-                                                                                                                                                                                                                                                                                </body>
-                                                                                                                                                                                                                                                                                </html>
+<script src="config.js"></script>
+<script src="script.js"></script>
+</body>
+</html>
