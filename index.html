@@ -9,7 +9,8 @@
 <body>
 
 <div class="start-screen" id="startScreen">
-  <button onclick="startExperience()">Começar nossa história ❤️</button>
+  <div class="intro-text">Algumas histórias não começam por acaso...</div>
+  <div class="tap">Toque para começar</div>
 </div>
 
 <audio id="music" src="assets/musica.mp3"></audio>
@@ -18,23 +19,45 @@
   <canvas id="bgCanvas"></canvas>
 
   <div class="slide active">
-    <img src="assets/foto1.jpg" class="photo">
-    <p class="typewriter" id="frase1"></p>
+    <div class="photo-wrapper">
+      <img src="assets/foto1.jpg" class="photo">
+    </div>
+    <p class="typewriter"></p>
   </div>
 
   <div class="slide">
-    <img src="assets/foto2.jpg" class="photo">
-    <p class="typewriter" id="frase2"></p>
+    <div class="photo-wrapper">
+      <img src="assets/foto2.jpg" class="photo">
+    </div>
+    <p class="typewriter"></p>
   </div>
 
   <div class="slide">
-    <img src="assets/foto3.jpg" class="photo">
-    <p class="typewriter" id="frase3"></p>
+    <div class="photo-wrapper">
+      <img src="assets/foto3.jpg" class="photo">
+    </div>
+    <p class="typewriter"></p>
   </div>
 
-  <div class="slide">
-    <h2>Oficialmente juntos há:</h2>
-    <div id="timer"></div>
+  <div class="slide timer-slide">
+    <div class="timer-box">
+      <div class="big-number" id="days">0</div>
+      <div class="label">DIAS</div>
+      <div class="time-row">
+        <div>
+          <div class="small-number" id="hours">00</div>
+          <div class="label">HOR</div>
+        </div>
+        <div>
+          <div class="small-number" id="minutes">00</div>
+          <div class="label">MIN</div>
+        </div>
+        <div>
+          <div class="small-number" id="seconds">00</div>
+          <div class="label">SEG</div>
+        </div>
+      </div>
+    </div>
   </div>
 
   <div class="slide final">
