@@ -1,37 +1,59 @@
 let currentSlide = 0;
+let podeAvancar = false;
+
 const slides = document.querySelectorAll(".slide");
 const music = document.getElementById("music");
 const timerElement = document.getElementById("timer");
 const naoBtn = document.getElementById("naoBtn");
 
-document.getElementById("frase1").innerText = CONFIG.frases[0];
-document.getElementById("frase2").innerText = CONFIG.frases[1];
-document.getElementById("frase3").innerText = CONFIG.frases[2];
 document.getElementById("mensagemFinal").innerText = CONFIG.mensagemFinal;
 
 function startExperience() {
   document.getElementById("startScreen").style.display = "none";
   document.getElementById("mainContent").classList.remove("hidden");
   music.play();
-  showSlide(0);
-  startTimer();
-  setInterval(nextSlide, 6000);
   startParticles();
+  iniciarSlide(0);
 }
 
-function showSlide(index) {
-  slides.forEach(slide => slide.classList.remove("active"));
+function iniciarSlide(index) {
+  slides.forEach(s => s.classList.remove("active"));
   slides[index].classList.add("active");
-}
+  podeAvancar = false;
 
-function nextSlide() {
-  if (currentSlide < slides.length - 1) {
-    currentSlide++;
-    showSlide(currentSlide);
+  if (slides[index].querySelector(".typewriter")) {
+    const texto = CONFIG.frases[index];
+    efeitoEscrita(slides[index].querySelector(".typewriter"), texto);
+  } else if (slides[index].querySelector("#timer")) {
+    iniciarTimer();
+    podeAvancar = true;
+  } else {
+    podeAvancar = true;
   }
 }
 
-function startTimer() {
+function efeitoEscrita(elemento, texto) {
+  elemento.innerHTML = "";
+  let i = 0;
+  const intervalo = setInterval(() => {
+    elemento.innerHTML += texto.charAt(i);
+    i++;
+    if (i >= texto.length) {
+      clearInterval(intervalo);
+      podeAvancar = true;
+    }
+  }, 40);
+}
+
+document.addEventListener("click", () => {
+  if (!podeAvancar) return;
+  if (currentSlide < slides.length - 1) {
+    currentSlide++;
+    iniciarSlide(currentSlide);
+  }
+});
+
+function iniciarTimer() {
   const startDate = new Date(CONFIG.dataPedido);
 
   setInterval(() => {
@@ -52,26 +74,16 @@ function startTimer() {
   }, 1000);
 }
 
-function explodeHearts() {
+function aceitou() {
+  document.body.style.background =
+    "linear-gradient(to bottom, #14143b, #1c1c52, #2a2a72)";
   document.getElementById("respostaFinal").innerText =
-    "Você acabou de me fazer a pessoa mais feliz do mundo ❤️";
-
-  for (let i = 0; i < 80; i++) {
-    const heart = document.createElement("div");
-    heart.innerText = "❤️";
-    heart.style.position = "fixed";
-    heart.style.left = Math.random() * window.innerWidth + "px";
-    heart.style.top = Math.random() * window.innerHeight + "px";
-    heart.style.fontSize = "24px";
-    document.body.appendChild(heart);
-    setTimeout(() => heart.remove(), 2000);
-  }
+    "Agora começa oficialmente o nosso para sempre ❤️";
 }
 
 naoBtn.addEventListener("mouseover", () => {
-  naoBtn.style.position = "absolute";
-  naoBtn.style.left = Math.random() * 80 + "%";
-  naoBtn.style.top = Math.random() * 80 + "%";
+  naoBtn.style.left = Math.random() * 70 + "%";
+  naoBtn.style.top = Math.random() * 70 + "%";
 });
 
 function startParticles() {
@@ -82,25 +94,34 @@ function startParticles() {
 
   const particles = [];
 
-  for (let i = 0; i < 40; i++) {
+  for (let i = 0; i < 50; i++) {
     particles.push({
       x: Math.random() * canvas.width,
       y: Math.random() * canvas.height,
       size: Math.random() * 3,
-      speed: Math.random() * 0.5
+      speed: Math.random() * 0.5,
+      heart: Math.random() > 0.7
     });
   }
 
   function animate() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
-    ctx.fillStyle = "rgba(255,255,255,0.2)";
+
     particles.forEach(p => {
-      ctx.beginPath();
-      ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
-      ctx.fill();
+      ctx.fillStyle = "rgba(255,255,255,0.15)";
+      if (p.heart) {
+        ctx.font = "14px Arial";
+        ctx.fillText("❤️", p.x, p.y);
+      } else {
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+        ctx.fill();
+      }
+
       p.y -= p.speed;
       if (p.y < 0) p.y = canvas.height;
     });
+
     requestAnimationFrame(animate);
   }
 

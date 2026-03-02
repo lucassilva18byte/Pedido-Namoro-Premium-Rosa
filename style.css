@@ -1,7 +1,7 @@
 body {
   margin: 0;
   font-family: 'Segoe UI', sans-serif;
-  background: linear-gradient(to bottom, #0f0c29, #302b63, #24243e);
+  background: linear-gradient(to bottom, #0a0a1f, #14143b, #1c1c52);
   color: white;
   text-align: center;
   overflow: hidden;
@@ -25,6 +25,11 @@ body {
   color: white;
   cursor: pointer;
   box-shadow: 0 0 20px rgba(77,166,255,0.6);
+  transition: 0.3s;
+}
+
+.start-screen button:hover {
+  transform: scale(1.05);
 }
 
 .container {
@@ -40,6 +45,8 @@ body {
   display: none;
   padding: 40px 20px;
   box-sizing: border-box;
+  opacity: 0;
+  transition: opacity 0.8s ease;
 }
 
 .slide.active {
@@ -47,6 +54,7 @@ body {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  opacity: 1;
 }
 
 .photo {
@@ -54,7 +62,12 @@ body {
   max-width: 320px;
   border-radius: 20px;
   margin-bottom: 20px;
-  box-shadow: 0 0 25px rgba(255,255,255,0.2);
+  box-shadow: 0 0 30px rgba(255,255,255,0.2);
+}
+
+.typewriter {
+  font-size: 18px;
+  min-height: 50px;
 }
 
 #timer {
@@ -73,11 +86,16 @@ body {
   border-radius: 30px;
   border: none;
   cursor: pointer;
+  transition: 0.3s;
 }
 
 .sim {
   background: #4da6ff;
-  box-shadow: 0 0 15px rgba(77,166,255,0.7);
+  box-shadow: 0 0 20px rgba(77,166,255,0.8);
+}
+
+.sim:hover {
+  transform: scale(1.1);
 }
 
 .nao {

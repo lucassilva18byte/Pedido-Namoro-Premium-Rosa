@@ -1,5 +1,4 @@
 const CONFIG = {
-  corPrimaria: "#4da6ff",
   dataPedido: "2026-02-27T20:00:00",
   frases: [
     "Foi aqui que tudo começou...",
